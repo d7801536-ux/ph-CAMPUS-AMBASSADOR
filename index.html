@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programming Hub Campus Ambassador Program</title>
+  <meta name="description" content="Rep one of the world's biggest coding apps, right from your campus. 10M+ learners, 3 spots open.">
+  <meta name="theme-color" content="#0D1117">
+  <link rel="canonical" href="https://programminghub.io/ambassador">
+  
+  <!-- OpenGraph Social Preview -->
+  <meta property="og:title" content="Programming Hub Campus Ambassador Program">
+  <meta property="og:description" content="Rep one of the world's biggest coding apps, right from your campus. 10M+ learners, 3 spots open.">
+  <meta property="og:image" content="./assets/og-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://programminghub.io/ambassador">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Programming Hub Campus Ambassador Program">
+  <meta name="twitter:description" content="Rep one of the world's biggest coding apps, right from your campus.">
+  <meta name="twitter:image" content="./assets/og-share.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./styles.css">
+
+  <!-- JSON-LD Structured Data (Organization + WebPage only) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://programminghub.io/#organization",
+        "name": "Programming Hub",
+        "url": "https://programminghub.io",
+        "logo": "https://programminghub.io/ambassador/assets/PH_logo.png",
+        "sameAs": [
+          "https://instagram.com/programminghub"
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://programminghub.io/ambassador/#webpage",
+        "url": "https://programminghub.io/ambassador",
+        "name": "Programming Hub Campus Ambassador Program",
+        "description": "Rep one of the world's biggest coding apps, right from your campus.",
+        "isPartOf": {
+          "@id": "https://programminghub.io/#organization"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Top Read Progress Bar -->
+  <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="https://programminghub.io" class="brand-logo" aria-label="Programming Hub Home">
+        <img src="./assets/PH_logo.png" alt="Programming Hub" width="140" height="32" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+        <span style="display:none;"><span class="symbol">$</span> programminghub<span class="symbol">_</span></span>
+      </a>
+      <div class="header-actions">
+        <div class="header-spots-pill" id="spots-count-display">
+          <span class="dot"></span> 3 of 3 open
+        </div>
+        <a href="#" class="btn btn-primary btn-sm js-apply-btn" data-placement="header">Apply Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- HERO SECTION -->
+    <section class="section hero-section" id="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <div class="hero-content reveal-on-scroll">
+            <span class="eyebrow">$ programminghub.io/ambassador</span>
+            <h1 class="hero-title">BECOME A CAMPUS AMBASSADOR</h1>
+            <p class="hero-sub">Rep one of the world's biggest coding apps, right from your campus.</p>
+            
+            <div class="hero-stats-row" role="region" aria-label="Key Statistics">
+              <div class="hero-stat-item">
+                <span class="stat-num js-countup" data-target="10M+">10M+</span> learners
+              </div>
+              <span class="hero-stat-divider">·</span>
+              <div class="hero-stat-item">
+                Only <span class="stat-num js-countup" data-target="3">3</span> spots
+              </div>
+              <span class="hero-stat-divider">·</span>
+              <div class="hero-stat-item">
+                <span class="stat-num js-countup" data-target="₹0">₹0</span> cost
+              </div>
+            </div>
+
+            <div class="hero-cta-group">
+              <a href="#" class="btn btn-primary js-apply-btn" data-placement="hero">Start my application</a>
+              <a href="#opportunity-section" class="btn btn-secondary">View perks</a>
+            </div>
+          </div>
+
+          <!-- Micro-Shell Terminal -->
+          <div class="terminal-card reveal-on-scroll" role="region" aria-label="Interactive Terminal Micro-Shell">
+            <div class="terminal-titlebar">
+              <div class="terminal-dots">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-yellow"></span>
+                <span class="terminal-dot dot-green"></span>
+              </div>
+              <span class="terminal-title">campus_ambassador.sh — 80x24</span>
+              <span></span>
+            </div>
+            
+            <!-- Visually hidden input for touch devices -->
+            <input type="text" id="terminal-hidden-input" class="terminal-hidden-input" autocomplete="off" spellcheck="false" aria-label="Terminal command input">
+            
+            <div class="terminal-body" id="terminal-body" tabindex="0" aria-live="polite">
+              <!-- Static Fallback Content for No-JS / Initial State -->
+              <noscript>
+                <div class="terminal-line output">Programming Hub Ambassador OS v2.4</div>
+                <div class="terminal-line success">✓ Connected. 10M+ learners active.</div>
+                <div class="terminal-line warning">! Status: 3 spots open on campus.</div>
+                <div class="terminal-line output">Perks: Free Pro Access, Official Certificate, Internship Path</div>
+                <div class="terminal-line output">Duties: Post 3x a week, 1 campus activity, share feedback</div>
+              </noscript>
+            </div>
+
+            <div class="terminal-prompt-row" style="padding: 0 1.25rem 1rem;">
+              <span class="terminal-prompt-symbol">$</span>
+              <span id="terminal-input-display" class="terminal-input-display"></span>
+              <span class="terminal-cursor"></span>
+            </div>
+
+            <div class="terminal-chips" aria-label="Quick terminal commands">
+              <button class="chip js-terminal-chip" data-cmd="help">help</button>
+              <button class="chip js-terminal-chip" data-cmd="perks">perks</button>
+              <button class="chip js-terminal-chip" data-cmd="spots">spots</button>
+              <button class="chip js-terminal-chip" data-cmd="apply">apply</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: GOOGLE PLAY CRED -->
+    <section class="section" id="cred-section">
+      <div class="container">
+        <div class="reveal-on-scroll">
+          <span class="eyebrow">// this isn't just any app</span>
+          <h2 class="section-headline">Real Google Play cred.</h2>
+        </div>
+
+        <div class="cred-grid">
+          <div class="cred-card reveal-on-scroll">
+            <div class="cred-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M24 6L29 16.5L40 18L32 25.5L34 37L24 31.5L14 37L16 25.5L8 18L19 16.5L24 6Z" fill="#3DDC84" fill-opacity="0.15" stroke="#3DDC84"/>
+                <path d="M16 34V42L24 38L32 42V34" stroke="#FFD447"/>
+              </svg>
+            </div>
+            <h3 class="cred-title">Editor's Choice</h3>
+            <p class="cred-desc">Hand-picked by Google Play's own editorial team for design and quality.</p>
+          </div>
+
+          <div class="cred-card reveal-on-scroll">
+            <div class="cred-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 10H36V20C36 26.6274 30.6274 32 24 32C17.3726 32 12 26.6274 12 20V10Z" fill="#FFD447" fill-opacity="0.15" stroke="#FFD447"/>
+                <path d="M12 16H6C6 22 10 24 14 24" stroke="#FFD447"/>
+                <path d="M36 16H42C42 22 38 24 34 24" stroke="#FFD447"/>
+                <path d="M24 32V38" stroke="#FFD447"/>
+                <path d="M16 42H32" stroke="#FFD447"/>
+                <path d="M24 16L26.5 21L32 21.5L28 25L29.5 30.5L24 27.5L18.5 30.5L20 25L16 21.5L21.5 21L24 16Z" fill="#3DDC84"/>
+              </svg>
+            </div>
+            <h3 class="cred-title">Best of the Best '17</h3>
+            <p class="cred-desc">Named one of Google Play's top apps of the year, out of millions.</p>
+          </div>
+
+          <div class="cred-card reveal-on-scroll">
+            <div class="cred-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M24 6C24 6 36 12 36 26C36 34 30 38 24 42C18 38 12 34 12 26C12 12 24 6 24 6Z" fill="#3DDC84" fill-opacity="0.15" stroke="#3DDC84"/>
+                <path d="M24 16A4 4 0 1 0 24 24A4 4 0 1 0 24 16" fill="#FFD447" stroke="#FFD447"/>
+                <path d="M12 26L6 32V38L14 36" stroke="#3DDC84"/>
+                <path d="M36 26L42 32V38L34 36" stroke="#3DDC84"/>
+                <path d="M20 42C20 42 22 45 24 45C26 45 28 42 28 42" stroke="#FFD447"/>
+              </svg>
+            </div>
+            <h3 class="cred-title">Launchpad Backed</h3>
+            <p class="cred-desc">Selected and supported by Google's own startup accelerator.</p>
+          </div>
+        </div>
+
+        <p class="cred-closing reveal-on-scroll">
+          <strong>10M+</strong> learners worldwide, and growing.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: THE OPPORTUNITY (PERKS) -->
+    <section class="section" id="opportunity-section">
+      <div class="container">
+        <div class="reveal-on-scroll">
+          <span class="eyebrow-yellow eyebrow">&gt; the opportunity</span>
+          <h2 class="section-headline">What's in it for you?</h2>
+        </div>
+
+        <div class="perks-grid">
+          <div class="perk-card reveal-on-scroll">
+            <span class="perk-badge">PRO UNLOCKED</span>
+            <h3 class="perk-title">Pro Access, Free</h3>
+            <p class="perk-desc">Full Programming Hub Pro, yours for the entire program run.</p>
+          </div>
+
+          <div class="perk-card reveal-on-scroll">
+            <span class="perk-badge">OFFICIAL</span>
+            <h3 class="perk-title">Certificate</h3>
+            <p class="perk-desc">Official proof you completed the ambassador program.</p>
+          </div>
+
+          <div class="perk-card reveal-on-scroll">
+            <span class="perk-badge">FAST TRACK</span>
+            <h3 class="perk-title">Internship Path</h3>
+            <p class="perk-desc">Excel here, and a future internship opportunity opens up.</p>
+          </div>
+
+          <div class="perk-card reveal-on-scroll">
+            <span class="perk-badge">NETWORK</span>
+            <h3 class="perk-title">Community</h3>
+            <p class="perk-desc">Work with our team and fellow creators, never alone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DUTIES / VIBES -->
+    <section class="section" id="vibes-section">
+      <div class="container">
+        <div class="reveal-on-scroll">
+          <span class="eyebrow">// no grind, just vibes</span>
+          <h2 class="section-headline">Your part? Keep it fun.</h2>
+        </div>
+
+        <div class="duties-list">
+          <div class="duty-row reveal-on-scroll">
+            <span class="duty-bullet">&gt;_</span>
+            <div class="duty-content">
+              <h3 class="duty-title">Post 3x a week</h3>
+              <p class="duty-desc">We hand you the templates, just show up and post.</p>
+            </div>
+          </div>
+
+          <div class="duty-row reveal-on-scroll">
+            <span class="duty-bullet">&gt;_</span>
+            <div class="duty-content">
+              <h3 class="duty-title">1 campus activity</h3>
+              <p class="duty-desc">One event or activation per semester. That's it.</p>
+            </div>
+          </div>
+
+          <div class="duty-row reveal-on-scroll">
+            <span class="duty-bullet">&gt;_</span>
+            <div class="duty-content">
+              <h3 class="duty-title">Share real feedback</h3>
+              <p class="duty-desc">Tell us what students on your campus actually want.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vibes-closing reveal-on-scroll">
+          we hand you the templates. <span>you bring the vibe.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: QUIZ SELF-CHECK -->
+    <section class="section" id="quiz-section">
+      <div class="container">
+        <div class="reveal-on-scroll">
+          <span class="eyebrow-yellow eyebrow">&gt; sound like you?</span>
+          <h2 class="section-headline">Who we're looking for</h2>
+          <p class="section-sub">Take the 4-question self-check to see if you're a fit for campus ambassador.</p>
+        </div>
+
+        <div id="quiz-wrapper" class="quiz-wrapper reveal-on-scroll" role="region" aria-label="Interactive Fit Quiz">
+          <!-- Static HTML fallback -->
+          <noscript>
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <p>✓ You love fun, tech-based social media content</p>
+              <p>✓ You want to help grow an app used by millions</p>
+              <p>✓ You want to be part of a real creator community</p>
+              <p>✓ You want an internship shot down the line</p>
+              <a href="#" class="btn btn-primary js-apply-btn" data-placement="quiz" style="margin-top:1rem;">Start my application</a>
+            </div>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: HOW TO APPLY & SPOTS -->
+    <section class="section" id="apply-section">
+      <div class="container">
+        <div class="reveal-on-scroll">
+          <span class="eyebrow">&gt; get started</span>
+          <h2 class="section-headline">How to apply</h2>
+        </div>
+
+        <div class="apply-grid">
+          <!-- Spots Indicator Card -->
+          <div class="spots-card reveal-on-scroll">
+            <span class="spots-title">CAMPUS AVAILABILITY</span>
+            <div class="spots-tiles" id="spots-tiles-container" role="list" aria-label="Available ambassador slots">
+              <div class="spot-tile open" role="listitem">
+                <span style="font-weight:700;">SPOT 01</span>
+                <span>● OPEN</span>
+              </div>
+              <div class="spot-tile open" role="listitem">
+                <span style="font-weight:700;">SPOT 02</span>
+                <span>● OPEN</span>
+              </div>
+              <div class="spot-tile open" role="listitem">
+                <span style="font-weight:700;">SPOT 03</span>
+                <span>● OPEN</span>
+              </div>
+            </div>
+            <p style="font-size:0.85rem; color:var(--muted);">Slots are reviewed on a rolling basis. Selected candidates get notified via email.</p>
+          </div>
+
+          <!-- 3-Step Selection Process -->
+          <div class="steps-list">
+            <div class="step-card reveal-on-scroll">
+              <div class="step-num">01</div>
+              <div class="step-text">Fill the application form</div>
+            </div>
+
+            <div class="step-card reveal-on-scroll">
+              <div class="step-num">02</div>
+              <div class="step-text">Get a small task from us</div>
+            </div>
+
+            <div class="step-card reveal-on-scroll">
+              <div class="step-num">03</div>
+              <div class="step-text">Best 3 get selected</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="section final-cta-section">
+      <div class="container">
+        <div class="final-cta-box reveal-on-scroll">
+          <span class="eyebrow">$ apply --now</span>
+          <h2 class="section-headline">Only 3 spots. Make it count.</h2>
+          <a href="#" class="btn btn-primary js-apply-btn" data-placement="final">Start my application</a>
+          
+          <div class="share-wrapper">
+            <button class="btn-share" id="share-btn" aria-label="Share this opportunity with classmates">
+              <span>↗</span> Send this to someone on your campus
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-badges">
+        <span class="footer-badge-item">Editor's Choice</span>
+        <span>·</span>
+        <span class="footer-badge-item">Best of the Best '17</span>
+        <span>·</span>
+        <span class="footer-badge-item">Launchpad Backed</span>
+      </div>
+      <p class="footer-copy">
+        programminghub.io · Official Campus Ambassador Program
+      </p>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY APPLY BAR -->
+  <div class="mobile-sticky-bar" id="mobile-sticky-bar">
+    <div id="mobile-sticky-pill" style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text);">
+      <span style="color:var(--green); font-weight:bold;">● 3 SPOTS</span> OPEN
+    </div>
+    <a href="#" class="btn btn-primary btn-sm js-apply-btn" data-placement="sticky">Apply Now</a>
+  </div>
+
+  <!-- EMBEDDED FORM MODAL & BOTTOM SHEET -->
+  <div id="apply-modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span id="modal-title" class="modal-title">$ apply --campus-ambassador</span>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close application form">✕</button>
+      </div>
+
+      <div class="modal-body" id="modal-body">
+        <form id="ambassador-app-form" novalidate>
+          
+          <!-- Anti-spam Honeypot Field -->
+          <input type="text" name="website_url_hp" class="form-hp-field" tabindex="-1" autocomplete="off">
+
+          <!-- Field 1: Full Name -->
+          <div class="form-group">
+            <label for="field-full-name" class="form-label">Full name <span class="required">*</span></label>
+            <input type="text" id="field-full-name" name="full_name" class="form-input" required placeholder="e.g. Rahul Sharma" autocomplete="name" enterkeyhint="next" aria-describedby="err-full-name">
+            <span id="err-full-name" class="form-error-msg">Please enter your full name.</span>
+          </div>
+
+          <!-- Field 2: Email -->
+          <div class="form-group">
+            <label for="field-email" class="form-label">Email address <span class="required">*</span></label>
+            <input type="email" id="field-email" name="email" class="form-input" required placeholder="rahul@example.com" autocomplete="email" enterkeyhint="next" aria-describedby="err-email">
+            <span id="err-email" class="form-error-msg">Please enter a valid email address.</span>
+          </div>
+
+          <!-- Field 3: WhatsApp Number -->
+          <div class="form-group">
+            <label for="field-whatsapp" class="form-label">WhatsApp number <span class="required">*</span></label>
+            <input type="tel" id="field-whatsapp" name="whatsapp" class="form-input" inputmode="numeric" required placeholder="10-digit mobile number" autocomplete="tel" enterkeyhint="next" aria-describedby="err-whatsapp">
+            <span id="err-whatsapp" class="form-error-msg">Please enter a valid 10-digit mobile number.</span>
+          </div>
+
+          <!-- Field 4: College -->
+          <div class="form-group">
+            <label for="field-college" class="form-label">College / University <span class="required">*</span></label>
+            <input type="text" id="field-college" name="college" class="form-input" required placeholder="e.g. IIT Bombay / Anna University" enterkeyhint="next" aria-describedby="err-college">
+            <span id="err-college" class="form-error-msg">Please enter your college name.</span>
+          </div>
+
+          <!-- Field 5: City -->
+          <div class="form-group">
+            <label for="field-city" class="form-label">City <span class="required">*</span></label>
+            <input type="text" id="field-city" name="city" class="form-input" required placeholder="e.g. Mumbai / Bangalore / Delhi" enterkeyhint="next" aria-describedby="err-city">
+            <span id="err-city" class="form-error-msg">Please enter your city.</span>
+          </div>
+
+          <!-- Field 6: Year of Study -->
+          <div class="form-group">
+            <label for="field-year" class="form-label">Year of study <span class="required">*</span></label>
+            <select id="field-year" name="year_of_study" class="form-select" required aria-describedby="err-year">
+              <option value="">Select year</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+              <option value="Postgrad">Postgrad</option>
+            </select>
+            <span id="err-year" class="form-error-msg">Please select your year of study.</span>
+          </div>
+
+          <!-- Field 7: Instagram Handle -->
+          <div class="form-group">
+            <label for="field-instagram" class="form-label">Instagram handle <span class="required">*</span></label>
+            <input type="text" id="field-instagram" name="instagram" class="form-input" required placeholder="username (without @)" enterkeyhint="next" aria-describedby="err-instagram">
+            <span id="err-instagram" class="form-error-msg">Please enter your Instagram handle.</span>
+          </div>
+
+          <!-- Field 8: Link to something you made -->
+          <div class="form-group">
+            <label for="field-link" class="form-label">Link to something you made <span style="color:var(--muted); font-size:0.75rem;">(optional)</span></label>
+            <input type="url" id="field-link" name="portfolio_link" class="form-input" placeholder="https://instagram.com/p/... or website" enterkeyhint="next" aria-describedby="err-link">
+            <span id="err-link" class="form-error-msg">Please enter a valid web URL.</span>
+          </div>
+
+          <!-- Field 9: Why You? -->
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <label for="field-why-you" class="form-label">Why you? <span class="required">*</span></label>
+              <span id="why-you-char-counter" class="char-counter">0/300</span>
+            </div>
+            <textarea id="field-why-you" name="why_you" class="form-textarea" required maxlength="300" placeholder="Tell us in 1-2 lines why you'd be a great campus ambassador." enterkeyhint="done" aria-describedby="err-why-you"></textarea>
+            <span id="err-why-you" class="form-error-msg">Please tell us why you'd be a great fit (max 300 chars).</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">Submit Application</button>
+
+          <p class="form-privacy-note">
+            Your data is processed according to Programming Hub's <a href="https://programminghub.io/privacy" target="_blank" rel="noopener">Privacy Policy</a>.
+          </p>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="./app.js"></script>
+</body>
+</html>
