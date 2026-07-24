@@ -123,11 +123,9 @@
               <span></span>
             </div>
             
-            <!-- Visually hidden input for touch devices -->
             <input type="text" id="terminal-hidden-input" class="terminal-hidden-input" autocomplete="off" spellcheck="false" aria-label="Terminal command input">
             
             <div class="terminal-body" id="terminal-body" tabindex="0" aria-live="polite">
-              <!-- Static Fallback Content for No-JS / Initial State -->
               <noscript>
                 <div class="terminal-line output">Programming Hub Ambassador OS v2.4</div>
                 <div class="terminal-line success">✓ Connected. 10M+ learners active.</div>
@@ -155,7 +153,7 @@
       </div>
     </section>
 
-    <!-- SECTION 1: GOOGLE PLAY CRED -->
+    <!-- SECTION 1: GOOGLE PLAY CRED (TASK B2 & B3 REDESIGN) -->
     <section class="section" id="cred-section">
       <div class="container">
         <div class="reveal-on-scroll">
@@ -163,21 +161,27 @@
           <h2 class="section-headline">Real Google Play cred.</h2>
         </div>
 
-        <div class="cred-grid">
-          <div class="cred-card reveal-on-scroll">
-            <div class="cred-icon-wrap">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Task B2: Compact 1-Panel 3-Row Credential List -->
+        <div class="cred-panel reveal-on-scroll" role="list">
+          
+          <!-- Row 1: Editor's Choice (Green Accent) -->
+          <div class="cred-row cred-row-green" role="listitem">
+            <div class="cred-row-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M24 6L29 16.5L40 18L32 25.5L34 37L24 31.5L14 37L16 25.5L8 18L19 16.5L24 6Z" fill="#3DDC84" fill-opacity="0.15" stroke="#3DDC84"/>
                 <path d="M16 34V42L24 38L32 42V34" stroke="#FFD447"/>
               </svg>
             </div>
-            <h3 class="cred-title">Editor's Choice</h3>
-            <p class="cred-desc">Hand-picked by Google Play's own editorial team for design and quality.</p>
+            <div class="cred-row-content">
+              <h3 class="cred-row-title">Editor's Choice</h3>
+              <p class="cred-row-desc">Hand-picked by Google Play's own editorial team for design and quality.</p>
+            </div>
           </div>
 
-          <div class="cred-card reveal-on-scroll">
-            <div class="cred-icon-wrap">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Row 2: Best of the Best '17 (Yellow Accent) -->
+          <div class="cred-row cred-row-yellow" role="listitem">
+            <div class="cred-row-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 10H36V20C36 26.6274 30.6274 32 24 32C17.3726 32 12 26.6274 12 20V10Z" fill="#FFD447" fill-opacity="0.15" stroke="#FFD447"/>
                 <path d="M12 16H6C6 22 10 24 14 24" stroke="#FFD447"/>
                 <path d="M36 16H42C42 22 38 24 34 24" stroke="#FFD447"/>
@@ -186,13 +190,16 @@
                 <path d="M24 16L26.5 21L32 21.5L28 25L29.5 30.5L24 27.5L18.5 30.5L20 25L16 21.5L21.5 21L24 16Z" fill="#3DDC84"/>
               </svg>
             </div>
-            <h3 class="cred-title">Best of the Best '17</h3>
-            <p class="cred-desc">Named one of Google Play's top apps of the year, out of millions.</p>
+            <div class="cred-row-content">
+              <h3 class="cred-row-title">Best of the Best '17</h3>
+              <p class="cred-row-desc">Named one of Google Play's top apps of the year, out of millions.</p>
+            </div>
           </div>
 
-          <div class="cred-card reveal-on-scroll">
-            <div class="cred-icon-wrap">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Row 3: Launchpad Backed (Green Accent) -->
+          <div class="cred-row cred-row-green" role="listitem">
+            <div class="cred-row-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M24 6C24 6 36 12 36 26C36 34 30 38 24 42C18 38 12 34 12 26C12 12 24 6 24 6Z" fill="#3DDC84" fill-opacity="0.15" stroke="#3DDC84"/>
                 <path d="M24 16A4 4 0 1 0 24 24A4 4 0 1 0 24 16" fill="#FFD447" stroke="#FFD447"/>
                 <path d="M12 26L6 32V38L14 36" stroke="#3DDC84"/>
@@ -200,18 +207,24 @@
                 <path d="M20 42C20 42 22 45 24 45C26 45 28 42 28 42" stroke="#FFD447"/>
               </svg>
             </div>
-            <h3 class="cred-title">Launchpad Backed</h3>
-            <p class="cred-desc">Selected and supported by Google's own startup accelerator.</p>
+            <div class="cred-row-content">
+              <h3 class="cred-row-title">Launchpad Backed</h3>
+              <p class="cred-row-desc">Selected and supported by Google's own startup accelerator.</p>
+            </div>
           </div>
+
         </div>
 
-        <p class="cred-closing reveal-on-scroll">
-          <strong>10M+</strong> learners worldwide, and growing.
-        </p>
+        <!-- Task B3: Standalone 10M+ Stat Proof Anchor Block -->
+        <div class="cred-stat-anchor reveal-on-scroll">
+          <div class="cred-stat-number js-countup" data-target="10M+">10M+</div>
+          <div class="cred-stat-label">learners worldwide, and growing</div>
+        </div>
+
       </div>
     </section>
 
-    <!-- SECTION 2: THE OPPORTUNITY (PERKS) -->
+    <!-- SECTION 2: THE OPPORTUNITY (TASK B4 PERKS 2x2 GRID REDESIGN) -->
     <section class="section" id="opportunity-section">
       <div class="container">
         <div class="reveal-on-scroll">
@@ -219,30 +232,64 @@
           <h2 class="section-headline">What's in it for you?</h2>
         </div>
 
+        <!-- Task B4: 2x2 Grid with Left Accent Rails & 4 Monoline SVGs (No Invented Badges) -->
         <div class="perks-grid">
-          <div class="perk-card reveal-on-scroll">
-            <span class="perk-badge">PRO UNLOCKED</span>
+          
+          <!-- Card 1: Pro Access (Green Rail) -->
+          <div class="perk-card perk-card-green reveal-on-scroll">
+            <div class="perk-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 3L27 9L16 29L5 9L16 3Z" fill="currentColor" fill-opacity="0.15"/>
+                <path d="M5 9H27"/>
+                <path d="M11 9L16 29L21 9"/>
+                <path d="M11 9L16 3L21 9"/>
+              </svg>
+            </div>
             <h3 class="perk-title">Pro Access, Free</h3>
             <p class="perk-desc">Full Programming Hub Pro, yours for the entire program run.</p>
           </div>
 
-          <div class="perk-card reveal-on-scroll">
-            <span class="perk-badge">OFFICIAL</span>
+          <!-- Card 2: Certificate (Yellow Rail) -->
+          <div class="perk-card perk-card-yellow reveal-on-scroll">
+            <div class="perk-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="13" r="8" fill="currentColor" fill-opacity="0.15"/>
+                <path d="M12 13L15 16L20 10"/>
+                <path d="M12 20L9 29L16 26L23 29L20 20"/>
+              </svg>
+            </div>
             <h3 class="perk-title">Certificate</h3>
             <p class="perk-desc">Official proof you completed the ambassador program.</p>
           </div>
 
-          <div class="perk-card reveal-on-scroll">
-            <span class="perk-badge">FAST TRACK</span>
+          <!-- Card 3: Internship Path (Yellow Rail) -->
+          <div class="perk-card perk-card-yellow reveal-on-scroll">
+            <div class="perk-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="9" width="24" height="17" rx="3" fill="currentColor" fill-opacity="0.15"/>
+                <path d="M11 9V6C11 4.89543 11.8954 4 13 4H19C20.1046 4 21 4.89543 21 6V9"/>
+                <path d="M4 15H28"/>
+                <path d="M14 13H18V17H14V13Z"/>
+              </svg>
+            </div>
             <h3 class="perk-title">Internship Path</h3>
             <p class="perk-desc">Excel here, and a future internship opportunity opens up.</p>
           </div>
 
-          <div class="perk-card reveal-on-scroll">
-            <span class="perk-badge">NETWORK</span>
+          <!-- Card 4: Community (Green Rail) -->
+          <div class="perk-card perk-card-green reveal-on-scroll">
+            <div class="perk-icon-wrap">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="10" r="4" fill="currentColor" fill-opacity="0.15"/>
+                <circle cx="21" cy="12" r="3.5"/>
+                <path d="M4 25C4 20.5 7.5 17 11 17C14.5 17 18 20.5 18 25"/>
+                <path d="M18 19.5C19 18.6 20.2 18 21.5 18C24 18 26.5 20.5 26.5 24.5"/>
+              </svg>
+            </div>
             <h3 class="perk-title">Community</h3>
             <p class="perk-desc">Work with our team and fellow creators, never alone.</p>
           </div>
+
         </div>
       </div>
     </section>
@@ -297,7 +344,6 @@
         </div>
 
         <div id="quiz-wrapper" class="quiz-wrapper reveal-on-scroll" role="region" aria-label="Interactive Fit Quiz">
-          <!-- Static HTML fallback -->
           <noscript>
             <div style="display:flex; flex-direction:column; gap:1rem;">
               <p>✓ You love fun, tech-based social media content</p>
@@ -402,104 +448,6 @@
       <span style="color:var(--green); font-weight:bold;">● 3 SPOTS</span> OPEN
     </div>
     <a href="#" class="btn btn-primary btn-sm js-apply-btn" data-placement="sticky">Apply Now</a>
-  </div>
-
-  <!-- EMBEDDED FORM MODAL & BOTTOM SHEET -->
-  <div id="apply-modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-card">
-      <div class="modal-header">
-        <span id="modal-title" class="modal-title">$ apply --campus-ambassador</span>
-        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close application form">✕</button>
-      </div>
-
-      <div class="modal-body" id="modal-body">
-        <form id="ambassador-app-form" novalidate>
-          
-          <!-- Anti-spam Honeypot Field -->
-          <input type="text" name="website_url_hp" class="form-hp-field" tabindex="-1" autocomplete="off">
-
-          <!-- Field 1: Full Name -->
-          <div class="form-group">
-            <label for="field-full-name" class="form-label">Full name <span class="required">*</span></label>
-            <input type="text" id="field-full-name" name="full_name" class="form-input" required placeholder="e.g. Rahul Sharma" autocomplete="name" enterkeyhint="next" aria-describedby="err-full-name">
-            <span id="err-full-name" class="form-error-msg">Please enter your full name.</span>
-          </div>
-
-          <!-- Field 2: Email -->
-          <div class="form-group">
-            <label for="field-email" class="form-label">Email address <span class="required">*</span></label>
-            <input type="email" id="field-email" name="email" class="form-input" required placeholder="rahul@example.com" autocomplete="email" enterkeyhint="next" aria-describedby="err-email">
-            <span id="err-email" class="form-error-msg">Please enter a valid email address.</span>
-          </div>
-
-          <!-- Field 3: WhatsApp Number -->
-          <div class="form-group">
-            <label for="field-whatsapp" class="form-label">WhatsApp number <span class="required">*</span></label>
-            <input type="tel" id="field-whatsapp" name="whatsapp" class="form-input" inputmode="numeric" required placeholder="10-digit mobile number" autocomplete="tel" enterkeyhint="next" aria-describedby="err-whatsapp">
-            <span id="err-whatsapp" class="form-error-msg">Please enter a valid 10-digit mobile number.</span>
-          </div>
-
-          <!-- Field 4: College -->
-          <div class="form-group">
-            <label for="field-college" class="form-label">College / University <span class="required">*</span></label>
-            <input type="text" id="field-college" name="college" class="form-input" required placeholder="e.g. IIT Bombay / Anna University" enterkeyhint="next" aria-describedby="err-college">
-            <span id="err-college" class="form-error-msg">Please enter your college name.</span>
-          </div>
-
-          <!-- Field 5: City -->
-          <div class="form-group">
-            <label for="field-city" class="form-label">City <span class="required">*</span></label>
-            <input type="text" id="field-city" name="city" class="form-input" required placeholder="e.g. Mumbai / Bangalore / Delhi" enterkeyhint="next" aria-describedby="err-city">
-            <span id="err-city" class="form-error-msg">Please enter your city.</span>
-          </div>
-
-          <!-- Field 6: Year of Study -->
-          <div class="form-group">
-            <label for="field-year" class="form-label">Year of study <span class="required">*</span></label>
-            <select id="field-year" name="year_of_study" class="form-select" required aria-describedby="err-year">
-              <option value="">Select year</option>
-              <option value="1st Year">1st Year</option>
-              <option value="2nd Year">2nd Year</option>
-              <option value="3rd Year">3rd Year</option>
-              <option value="4th Year">4th Year</option>
-              <option value="Postgrad">Postgrad</option>
-            </select>
-            <span id="err-year" class="form-error-msg">Please select your year of study.</span>
-          </div>
-
-          <!-- Field 7: Instagram Handle -->
-          <div class="form-group">
-            <label for="field-instagram" class="form-label">Instagram handle <span class="required">*</span></label>
-            <input type="text" id="field-instagram" name="instagram" class="form-input" required placeholder="username (without @)" enterkeyhint="next" aria-describedby="err-instagram">
-            <span id="err-instagram" class="form-error-msg">Please enter your Instagram handle.</span>
-          </div>
-
-          <!-- Field 8: Link to something you made -->
-          <div class="form-group">
-            <label for="field-link" class="form-label">Link to something you made <span style="color:var(--muted); font-size:0.75rem;">(optional)</span></label>
-            <input type="url" id="field-link" name="portfolio_link" class="form-input" placeholder="https://instagram.com/p/... or website" enterkeyhint="next" aria-describedby="err-link">
-            <span id="err-link" class="form-error-msg">Please enter a valid web URL.</span>
-          </div>
-
-          <!-- Field 9: Why You? -->
-          <div class="form-group">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <label for="field-why-you" class="form-label">Why you? <span class="required">*</span></label>
-              <span id="why-you-char-counter" class="char-counter">0/300</span>
-            </div>
-            <textarea id="field-why-you" name="why_you" class="form-textarea" required maxlength="300" placeholder="Tell us in 1-2 lines why you'd be a great campus ambassador." enterkeyhint="done" aria-describedby="err-why-you"></textarea>
-            <span id="err-why-you" class="form-error-msg">Please tell us why you'd be a great fit (max 300 chars).</span>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">Submit Application</button>
-
-          <p class="form-privacy-note">
-            Your data is processed according to Programming Hub's <a href="https://programminghub.io/privacy" target="_blank" rel="noopener">Privacy Policy</a>.
-          </p>
-
-        </form>
-      </div>
-    </div>
   </div>
 
   <!-- JavaScript -->

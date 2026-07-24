@@ -1,10 +1,9 @@
-/* Programming Hub Campus Ambassador Application Logic — Final Phase */
+/* Programming Hub Campus Ambassador Application Logic */
 
 // Centralized Runtime Configuration
 const CONFIG = {
   // application
-  FORM_ENDPOINT:      "",                                  // POST endpoint (Tally / Formspree / Getform)
-  FORM_URL:           "",                                  // External fallback form URL
+  FORM_URL:           "",                                  // External Google Form URL
   // program state
   SPOTS_TOTAL:        3,
   SPOTS_OPEN:         3,
@@ -21,13 +20,6 @@ const CONFIG = {
 // Check prefers-reduced-motion
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Anti-spam page load timestamp
-const pageLoadTimestamp = Date.now();
-
-// Saved scroll position for modal scroll restoration
-let savedScrollPosition = 0;
-let lastTriggeringElement = null;
-
 document.addEventListener('DOMContentLoaded', () => {
   initApplyHandlers();
   initSpotsIndicator();
@@ -35,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initFitQuiz();
   initScrollIntelligence();
   initShareHandler();
-  initFormModal();
   checkApplicationsOpenState();
 });
 
@@ -78,7 +69,6 @@ function track(event, props = {}) {
 function checkApplicationsOpenState() {
   if (CONFIG.APPLICATIONS_OPEN !== false) return;
 
-  // Update header and sticky pills
   const countDisplay = document.getElementById('spots-count-display');
   if (countDisplay) {
     countDisplay.innerHTML = `<span class="dot" style="background-color:var(--muted); box-shadow:none;"></span> Applications closed`;
@@ -89,28 +79,35 @@ function checkApplicationsOpenState() {
     mobilePill.innerHTML = `<span style="color:var(--muted); font-weight:bold;">APPLICATIONS CLOSED</span>`;
   }
 
-  // Disable all apply buttons
   const applyButtons = document.querySelectorAll('.js-apply-btn');
   applyButtons.forEach(btn => {
     btn.classList.add('is-disabled');
     btn.textContent = 'Applications closed';
     btn.setAttribute('aria-disabled', 'true');
-    if (btn.tagName === 'A') btn.removeAttribute('href');
+    if (btn.tagName === 'A') btn.setAttribute('href', '#');
   });
 
-  // Mark all spot tiles filled
   CONFIG.SPOTS_OPEN = 0;
   initSpotsIndicator();
 }
 
-/* 1. Apply Controls Interceptor (Rule 2: Single Delegated Listener on document) */
+/* 1. Task A2 & A3: Delegated Apply Link Controller & Analytics */
 function syncApplyHrefs() {
   if (CONFIG.APPLICATIONS_OPEN === false) return;
   const applyElements = document.querySelectorAll('.js-apply-btn');
-  const targetUrl = CONFIG.FORM_ENDPOINT || CONFIG.FORM_URL || "#";
+  const hasUrl = CONFIG.FORM_URL && CONFIG.FORM_URL.trim() !== "";
+  const targetHref = hasUrl ? CONFIG.FORM_URL : "#apply-section";
+
   applyElements.forEach(el => {
     if (el.tagName === 'A') {
-      el.setAttribute('href', targetUrl);
+      el.setAttribute('href', targetHref);
+      if (hasUrl) {
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener noreferrer');
+      } else {
+        el.removeAttribute('target');
+        el.removeAttribute('rel');
+      }
     }
   });
 }
@@ -131,18 +128,17 @@ function initApplyHandlers() {
       return;
     }
 
-    e.preventDefault();
-
     const placement = btn.getAttribute('data-placement') || 'general';
     track('hero_cta_click', { placement });
 
-    if (CONFIG.FORM_ENDPOINT && CONFIG.FORM_ENDPOINT.trim() !== "") {
-      openFormModal(btn, placement);
-    } else if (CONFIG.FORM_URL && CONFIG.FORM_URL.trim() !== "") {
-      window.open(CONFIG.FORM_URL, '_blank', 'noopener,noreferrer');
-    } else {
-      // Fallback: Open in-page modal for testing/preview
-      openFormModal(btn, placement);
+    const hasUrl = CONFIG.FORM_URL && CONFIG.FORM_URL.trim() !== "";
+    if (!hasUrl) {
+      e.preventDefault();
+      showToast("Application link goes live shortly");
+      const applySec = document.getElementById('apply-section');
+      if (applySec) {
+        applySec.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   });
 }
@@ -200,7 +196,6 @@ function initTerminalShell() {
     terminalBody.scrollTop = terminalBody.scrollHeight;
   }
 
-  // Auto-type boot sequence
   if (prefersReducedMotion) {
     bootLines.forEach(l => appendTerminalLine(l.type, l.text));
   } else {
@@ -225,7 +220,7 @@ function initTerminalShell() {
     
     switch (cmd) {
       case 'help':
-        appendTerminalLine('output', 'Available commands:\n  help    - Show this command list\n  whoami  - Current applicant role\n  perks   - View ambassador benefits\n  duties  - View key responsibilities\n  spots   - Check live slot status\n  apply   - Jump to application form\n  clear   - Clear terminal screen');
+        appendTerminalLine('output', 'Available commands:\n  help    - Show this command list\n  whoami  - Current applicant role\n  perks   - View ambassador benefits\n  duties  - View key responsibilities\n  spots   - Check live slot status\n  apply   - Jump to application section\n  clear   - Clear terminal screen');
         break;
 
       case 'whoami':
@@ -252,8 +247,13 @@ function initTerminalShell() {
         if (CONFIG.APPLICATIONS_OPEN === false) {
           appendTerminalLine('warning', 'Applications for this semester are currently closed.');
         } else {
-          appendTerminalLine('success', 'Opening application form...');
-          openFormModal(document.querySelector('.js-apply-btn'), 'terminal');
+          appendTerminalLine('success', 'Scrolling to application section...');
+          const applySec = document.getElementById('apply-section');
+          if (applySec) {
+            applySec.scrollIntoView({ behavior: 'smooth' });
+            const firstApplyBtn = applySec.querySelector('.js-apply-btn');
+            if (firstApplyBtn) firstApplyBtn.focus();
+          }
         }
         break;
 
@@ -457,7 +457,7 @@ function initFitQuiz() {
       const mainCta = document.createElement('a');
       mainCta.className = 'btn btn-primary js-apply-btn';
       mainCta.setAttribute('data-placement', 'quiz');
-      mainCta.href = CONFIG.FORM_ENDPOINT || CONFIG.FORM_URL || "#";
+      mainCta.href = CONFIG.FORM_URL && CONFIG.FORM_URL.trim() !== "" ? CONFIG.FORM_URL : "#apply-section";
       mainCta.textContent = CONFIG.APPLICATIONS_OPEN ? 'Start my application' : 'Applications closed';
       if (!CONFIG.APPLICATIONS_OPEN) mainCta.classList.add('is-disabled');
 
@@ -636,232 +636,4 @@ function initShareHandler() {
       }
     }
   });
-}
-
-/* 7. 2A. EMBEDDED FORM MODAL ENGINE */
-function initFormModal() {
-  const modalBackdrop = document.getElementById('apply-modal-backdrop');
-  const modalCloseBtn = document.getElementById('modal-close-btn');
-  const form = document.getElementById('ambassador-app-form');
-  const textarea = document.getElementById('field-why-you');
-  const charCounter = document.getElementById('why-you-char-counter');
-
-  if (!modalBackdrop) return;
-
-  modalCloseBtn?.addEventListener('click', closeFormModal);
-  modalBackdrop.addEventListener('click', (e) => {
-    if (e.target === modalBackdrop) closeFormModal();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalBackdrop.classList.contains('is-open')) {
-      closeFormModal();
-    }
-  });
-
-  modalBackdrop.addEventListener('keydown', (e) => {
-    if (e.key !== 'Tab') return;
-    const focusables = modalBackdrop.querySelectorAll('a[href], button:not([disabled]), input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
-    if (focusables.length === 0) return;
-
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  });
-
-  if (textarea && charCounter) {
-    textarea.addEventListener('input', () => {
-      const len = textarea.value.length;
-      charCounter.textContent = `${len}/300`;
-      if (len > 300) {
-        textarea.value = textarea.value.slice(0, 300);
-        charCounter.textContent = '300/300';
-      }
-    });
-  }
-
-  const inputs = form?.querySelectorAll('input, select, textarea');
-  inputs?.forEach(input => {
-    input.addEventListener('blur', () => validateField(input));
-  });
-
-  if (form) {
-    form.addEventListener('submit', handleFormSubmit);
-  }
-}
-
-function openFormModal(triggerEl, placement = 'general') {
-  const modalBackdrop = document.getElementById('apply-modal-backdrop');
-  if (!modalBackdrop) return;
-
-  savedScrollPosition = window.scrollY;
-  lastTriggeringElement = triggerEl || document.activeElement;
-
-  modalBackdrop.classList.add('is-open');
-  document.body.style.overflow = 'hidden';
-
-  track('form_open', { placement });
-
-  setTimeout(() => {
-    const firstInput = document.getElementById('field-full-name');
-    if (firstInput) firstInput.focus();
-  }, 100);
-}
-
-function closeFormModal() {
-  const modalBackdrop = document.getElementById('apply-modal-backdrop');
-  if (!modalBackdrop) return;
-
-  modalBackdrop.classList.remove('is-open');
-  document.body.style.overflow = '';
-  window.scrollTo(0, savedScrollPosition);
-
-  if (lastTriggeringElement && typeof lastTriggeringElement.focus === 'function') {
-    lastTriggeringElement.focus();
-  }
-}
-
-function validateField(input) {
-  const group = input.closest('.form-group');
-  if (!group) return true;
-
-  let isValid = true;
-  const value = input.value.trim();
-
-  if (input.hasAttribute('required') && !value) {
-    isValid = false;
-  } else if (input.type === 'email' && value) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    isValid = emailRegex.test(value);
-  } else if (input.type === 'tel' && value) {
-    const cleanTel = value.replace(/\s+/g, '').replace(/^\+91/, '');
-    isValid = /^\d{10}$/.test(cleanTel);
-  } else if (input.type === 'url' && value) {
-    try {
-      new URL(value);
-      isValid = true;
-    } catch (_) {
-      isValid = false;
-    }
-  }
-
-  if (!isValid) {
-    group.classList.add('has-error');
-    input.setAttribute('aria-invalid', 'true');
-  } else {
-    group.classList.remove('has-error');
-    input.removeAttribute('aria-invalid');
-  }
-  return isValid;
-}
-
-async function handleFormSubmit(e) {
-  e.preventDefault();
-  const form = e.target;
-  const submitBtn = form.querySelector('button[type="submit"]');
-
-  // Anti-spam check 1: Honeypot field
-  const hpField = form.querySelector('input[name="website_url_hp"]');
-  if (hpField && hpField.value) {
-    renderFormSuccess();
-    return;
-  }
-
-  // Anti-spam check 2: Minimum time-to-submit (3s)
-  if (Date.now() - pageLoadTimestamp < 3000) {
-    showToast("Please review your responses before submitting.");
-    return;
-  }
-
-  // Validate all fields
-  const fields = form.querySelectorAll('input:not(.form-hp-field), select, textarea');
-  let firstInvalid = null;
-
-  fields.forEach(field => {
-    const ok = validateField(field);
-    if (!ok && !firstInvalid) {
-      firstInvalid = field;
-      track('form_field_error', { field: field.name });
-    }
-  });
-
-  if (firstInvalid) {
-    firstInvalid.focus();
-    return;
-  }
-
-  // Clean WhatsApp and Instagram inputs
-  const waField = document.getElementById('field-whatsapp');
-  if (waField) {
-    waField.value = waField.value.replace(/\s+/g, '').replace(/^\+91/, '');
-  }
-
-  const instaField = document.getElementById('field-instagram');
-  if (instaField) {
-    instaField.value = instaField.value.replace(/^@/, '');
-  }
-
-  // Disable form and show spinner state
-  if (submitBtn) {
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
-  }
-
-  const formData = new FormData(form);
-
-  if (CONFIG.FORM_ENDPOINT && CONFIG.FORM_ENDPOINT.trim() !== "") {
-    try {
-      const resp = await fetch(CONFIG.FORM_ENDPOINT, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (resp.ok) {
-        track('form_submit_success');
-        renderFormSuccess();
-      } else {
-        throw new Error('Server returned response error');
-      }
-    } catch (err) {
-      track('form_submit_error', { reason: err.message });
-      showToast("Network error. Your responses are saved — please retry.");
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Retry Submission';
-      }
-    }
-  } else {
-    // Simulated mode when CONFIG.FORM_ENDPOINT is empty
-    setTimeout(() => {
-      track('form_submit_success');
-      renderFormSuccess();
-    }, 600);
-  }
-}
-
-function renderFormSuccess() {
-  const modalBody = document.getElementById('modal-body');
-  if (!modalBody) return;
-
-  modalBody.innerHTML = `
-    <div class="form-success-panel">
-      <div style="color:var(--green); font-size:1.1rem; font-weight:700;">$ application --received</div>
-      <p style="color:var(--text); font-size:1.05rem;">Your campus application has been logged successfully.</p>
-      <div style="border-top:1px solid var(--line); padding-top:1rem; color:var(--muted); font-size:0.9rem;">
-        <strong>What happens next?</strong><br>
-        1. Our team reviews your campus profile.<br>
-        2. Selected applicants receive a small task via WhatsApp/Email.<br>
-        3. The top 3 candidates get appointed as Campus Ambassadors.
-      </div>
-      <button class="btn btn-secondary" onclick="closeFormModal()" style="margin-top:0.5rem;">Close Window</button>
-    </div>
-  `;
 }
