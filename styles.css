@@ -49,8 +49,8 @@
   padding: 0;
 }
 
+/* Instant scroll by default on html to prevent load-time smooth scroll delays */
 html {
-  scroll-behavior: smooth;
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
@@ -58,6 +58,10 @@ html {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html.smooth-scroll {
+  scroll-behavior: smooth;
 }
 
 body {

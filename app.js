@@ -1,19 +1,34 @@
 /* Programming Hub Campus Ambassador Application Logic */
 
-// 1. Disable browser scroll restoration immediately at script load
+// 1. Immediately disable browser automatic scroll restoration at script load
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
-// 2. Force scroll position to top (0, 0) and strip incoming URL hashes (e.g. #opportunity-section from shorteners)
-(function stripIncomingHashAndResetScroll() {
-  if (window.location.hash) {
-    try {
-      history.replaceState(null, "", window.location.pathname + window.location.search);
-    } catch (e) {}
+// 2. Multi-frame instant scroll lock to (0, 0) for shortener links & mobile webviews
+function lockTopInstant() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  if (document.documentElement) document.documentElement.scrollTop = 0;
+  if (document.body) document.body.scrollTop = 0;
+}
+
+// Run lockTopInstant across the first 15 animation frames as layout completes
+lockTopInstant();
+let frameCnt = 0;
+function rafScrollLock() {
+  lockTopInstant();
+  if (frameCnt++ < 15) {
+    requestAnimationFrame(rafScrollLock);
   }
-  window.scrollTo(0, 0);
-})();
+}
+requestAnimationFrame(rafScrollLock);
+
+// Strip incoming URL hashes (e.g. #opportunity-section from shortener URLs)
+if (window.location.hash) {
+  try {
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  } catch (e) {}
+}
 
 // Centralized Runtime Configuration
 const CONFIG = {
@@ -36,7 +51,7 @@ const CONFIG = {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.scrollTo(0, 0);
+  lockTopInstant();
 
   initApplyHandlers();
   initViewPerksHandler();
@@ -49,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Force top on load and pageshow for mobile webviews & shortener redirects
-window.addEventListener('load', () => window.scrollTo(0, 0));
-window.addEventListener('pageshow', () => window.scrollTo(0, 0));
+window.addEventListener('load', lockTopInstant);
+window.addEventListener('pageshow', lockTopInstant);
 
 /* Toast Notice System */
 function showToast(message) {
