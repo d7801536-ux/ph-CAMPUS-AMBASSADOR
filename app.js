@@ -5,18 +5,22 @@ if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
-// 2. Force scroll position to (0, 0) immediately before DOM rendering completes if no valid section hash
-(function resetInitialScroll() {
-  const hash = window.location.hash;
-  if (!hash || hash === '#' || hash === '#top') {
-    window.scrollTo(0, 0);
-    if (hash === '#') {
-      try {
-        history.replaceState(null, "", window.location.pathname + window.location.search);
-      } catch (e) {}
-    }
-  }
-})();
+// 2. Robust function to force viewport to top (0, 0) across all browser rendering engines
+function forcePageToTop() {
+  window.scrollTo(0, 0);
+  if (document.documentElement) document.documentElement.scrollTop = 0;
+  if (document.body) document.body.scrollTop = 0;
+}
+
+// Execute immediately at script load
+forcePageToTop();
+
+// Strip stray tracking hashes (e.g., #_=_ from Facebook/Instagram/shorteners)
+if (window.location.hash && window.location.hash !== '#apply-section') {
+  try {
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  } catch (e) {}
+}
 
 // Centralized Runtime Configuration
 const CONFIG = {
@@ -39,12 +43,10 @@ const CONFIG = {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash;
-  const isValidSectionHash = hash && hash.length > 1 && hash !== '#' && document.getElementById(hash.substring(1));
-
-  if (!isValidSectionHash) {
-    window.scrollTo(0, 0);
-  }
+  // Ensure page stays at top for incoming shortener links and Instagram bio traffic
+  forcePageToTop();
+  setTimeout(forcePageToTop, 50);
+  setTimeout(forcePageToTop, 150);
 
   initApplyHandlers();
   initSpotsIndicator();
@@ -53,24 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollIntelligence();
   initShareHandler();
   checkApplicationsOpenState();
-
-  // If a valid section hash exists (e.g. #apply-section), scroll to it safely
-  if (isValidSectionHash) {
-    const targetEl = document.getElementById(hash.substring(1));
-    if (targetEl) {
-      setTimeout(() => {
-        targetEl.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
-  }
 });
 
-// Force top on pageshow / reload for mobile webviews and browsers
-window.addEventListener('pageshow', (e) => {
-  const hash = window.location.hash;
-  if (!hash || hash === '#') {
-    window.scrollTo(0, 0);
-  }
+// Extra safeguards for window load and pageshow (handles mobile webviews & shortener redirects)
+window.addEventListener('load', () => {
+  forcePageToTop();
+});
+
+window.addEventListener('pageshow', () => {
+  forcePageToTop();
 });
 
 /* Toast Notice System */
