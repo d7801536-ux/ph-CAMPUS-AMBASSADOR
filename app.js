@@ -1,9 +1,22 @@
 /* Programming Hub Campus Ambassador Application Logic */
 
-// Control browser scroll restoration at top of entry script
+// 1. Immediately disable browser automatic scroll restoration at script parse time
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
+
+// 2. Force scroll position to (0, 0) immediately before DOM rendering completes if no valid section hash
+(function resetInitialScroll() {
+  const hash = window.location.hash;
+  if (!hash || hash === '#' || hash === '#top') {
+    window.scrollTo(0, 0);
+    if (hash === '#') {
+      try {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      } catch (e) {}
+    }
+  }
+})();
 
 // Centralized Runtime Configuration
 const CONFIG = {
@@ -26,8 +39,10 @@ const CONFIG = {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Handle scroll position on load
-  if (!window.location.hash) {
+  const hash = window.location.hash;
+  const isValidSectionHash = hash && hash.length > 1 && hash !== '#' && document.getElementById(hash.substring(1));
+
+  if (!isValidSectionHash) {
     window.scrollTo(0, 0);
   }
 
@@ -39,14 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initShareHandler();
   checkApplicationsOpenState();
 
-  // If a hash was present in the URL, scroll to target section clear of sticky header
-  if (window.location.hash) {
-    const targetEl = document.querySelector(window.location.hash);
+  // If a valid section hash exists (e.g. #apply-section), scroll to it safely
+  if (isValidSectionHash) {
+    const targetEl = document.getElementById(hash.substring(1));
     if (targetEl) {
       setTimeout(() => {
         targetEl.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
+  }
+});
+
+// Force top on pageshow / reload for mobile webviews and browsers
+window.addEventListener('pageshow', (e) => {
+  const hash = window.location.hash;
+  if (!hash || hash === '#') {
+    window.scrollTo(0, 0);
   }
 });
 
@@ -70,7 +93,6 @@ function showToast(message) {
 
 /* 2C. Funnel Analytics Safe Tracker Wrapper */
 function track(event, props = {}) {
-  // Respect Do Not Track
   if (navigator.doNotTrack === "1" || window.doNotTrack === "1") return;
   if (!CONFIG.ANALYTICS_PROVIDER || CONFIG.ANALYTICS_PROVIDER === "") return;
   
@@ -81,7 +103,7 @@ function track(event, props = {}) {
       window.gtag('event', event, props);
     }
   } catch (err) {
-    // Silent failure — analytics script never breaks page runtime
+    // Silent failure
   }
 }
 
@@ -287,7 +309,7 @@ function initTerminalShell() {
     }
   }
 
-  // User click on terminal body focuses hidden input to raise mobile keyboard
+  // User tap on terminal body focuses hidden input to raise mobile keyboard
   terminalBody.addEventListener('click', () => {
     if (hiddenInput) hiddenInput.focus({ preventScroll: true });
   });
