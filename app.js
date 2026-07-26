@@ -1,5 +1,10 @@
 /* Programming Hub Campus Ambassador Application Logic */
 
+// Control browser scroll restoration at top of entry script
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 // Centralized Runtime Configuration
 const CONFIG = {
   // application
@@ -21,6 +26,11 @@ const CONFIG = {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Handle scroll position on load
+  if (!window.location.hash) {
+    window.scrollTo(0, 0);
+  }
+
   initApplyHandlers();
   initSpotsIndicator();
   initTerminalShell();
@@ -28,6 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollIntelligence();
   initShareHandler();
   checkApplicationsOpenState();
+
+  // If a hash was present in the URL, scroll to target section clear of sticky header
+  if (window.location.hash) {
+    const targetEl = document.querySelector(window.location.hash);
+    if (targetEl) {
+      setTimeout(() => {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }
 });
 
 /* Toast Notice System */
@@ -91,7 +111,7 @@ function checkApplicationsOpenState() {
   initSpotsIndicator();
 }
 
-/* 1. Task A2 & A3: Delegated Apply Link Controller & Analytics */
+/* 1. Delegated Apply Link Controller & Analytics */
 function syncApplyHrefs() {
   if (CONFIG.APPLICATIONS_OPEN === false) return;
   const applyElements = document.querySelectorAll('.js-apply-btn');
@@ -252,7 +272,7 @@ function initTerminalShell() {
           if (applySec) {
             applySec.scrollIntoView({ behavior: 'smooth' });
             const firstApplyBtn = applySec.querySelector('.js-apply-btn');
-            if (firstApplyBtn) firstApplyBtn.focus();
+            if (firstApplyBtn) firstApplyBtn.focus({ preventScroll: true });
           }
         }
         break;
@@ -267,8 +287,9 @@ function initTerminalShell() {
     }
   }
 
+  // User click on terminal body focuses hidden input to raise mobile keyboard
   terminalBody.addEventListener('click', () => {
-    if (hiddenInput) hiddenInput.focus();
+    if (hiddenInput) hiddenInput.focus({ preventScroll: true });
   });
 
   if (hiddenInput) {
