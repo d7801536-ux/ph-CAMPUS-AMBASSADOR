@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    // Prevent browser native hash jump on initial page load (e.g. /#opportunity-section from shorteners)
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    if (window.location.hash) {
+      try {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      } catch (e) {}
+      window.scrollTo(0, 0);
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programming Hub Campus Ambassador Program</title>
@@ -107,7 +119,7 @@
 
             <div class="hero-cta-group">
               <a href="#" class="btn btn-primary js-apply-btn" data-placement="hero">Start my application</a>
-              <a href="#opportunity-section" class="btn btn-secondary">View perks</a>
+              <button id="view-perks-btn" class="btn btn-secondary">View perks</button>
             </div>
           </div>
 

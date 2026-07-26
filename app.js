@@ -1,26 +1,19 @@
 /* Programming Hub Campus Ambassador Application Logic */
 
-// 1. Immediately disable browser automatic scroll restoration at script parse time
+// 1. Disable browser scroll restoration immediately at script load
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
-// 2. Robust function to force viewport to top (0, 0) across all browser rendering engines
-function forcePageToTop() {
+// 2. Force scroll position to top (0, 0) and strip incoming URL hashes (e.g. #opportunity-section from shorteners)
+(function stripIncomingHashAndResetScroll() {
+  if (window.location.hash) {
+    try {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    } catch (e) {}
+  }
   window.scrollTo(0, 0);
-  if (document.documentElement) document.documentElement.scrollTop = 0;
-  if (document.body) document.body.scrollTop = 0;
-}
-
-// Execute immediately at script load
-forcePageToTop();
-
-// Strip stray tracking hashes (e.g., #_=_ from Facebook/Instagram/shorteners)
-if (window.location.hash && window.location.hash !== '#apply-section') {
-  try {
-    history.replaceState(null, "", window.location.pathname + window.location.search);
-  } catch (e) {}
-}
+})();
 
 // Centralized Runtime Configuration
 const CONFIG = {
@@ -43,12 +36,10 @@ const CONFIG = {
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Ensure page stays at top for incoming shortener links and Instagram bio traffic
-  forcePageToTop();
-  setTimeout(forcePageToTop, 50);
-  setTimeout(forcePageToTop, 150);
+  window.scrollTo(0, 0);
 
   initApplyHandlers();
+  initViewPerksHandler();
   initSpotsIndicator();
   initTerminalShell();
   initFitQuiz();
@@ -57,14 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
   checkApplicationsOpenState();
 });
 
-// Extra safeguards for window load and pageshow (handles mobile webviews & shortener redirects)
-window.addEventListener('load', () => {
-  forcePageToTop();
-});
-
-window.addEventListener('pageshow', () => {
-  forcePageToTop();
-});
+// Force top on load and pageshow for mobile webviews & shortener redirects
+window.addEventListener('load', () => window.scrollTo(0, 0));
+window.addEventListener('pageshow', () => window.scrollTo(0, 0));
 
 /* Toast Notice System */
 function showToast(message) {
@@ -98,6 +84,20 @@ function track(event, props = {}) {
   } catch (err) {
     // Silent failure
   }
+}
+
+/* View Perks CTA Handler (Smooth Scroll without URL hash pollution) */
+function initViewPerksHandler() {
+  const perksBtn = document.getElementById('view-perks-btn');
+  if (!perksBtn) return;
+
+  perksBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const sec = document.getElementById('opportunity-section');
+    if (sec) {
+      sec.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 }
 
 /* 2H. Applications-Closed Master Switch Handler */
@@ -302,7 +302,6 @@ function initTerminalShell() {
     }
   }
 
-  // User tap on terminal body focuses hidden input to raise mobile keyboard
   terminalBody.addEventListener('click', () => {
     if (hiddenInput) hiddenInput.focus({ preventScroll: true });
   });
